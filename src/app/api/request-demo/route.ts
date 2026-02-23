@@ -12,6 +12,7 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const email = typeof body?.email === "string" ? body.email.trim() : "";
+    const lookingFor = typeof body?.lookingFor === "string" ? body.lookingFor.trim() : "";
 
     if (!email) {
       return NextResponse.json(
@@ -36,14 +37,29 @@ export async function POST(request: Request) {
       auth: { user, pass },
     });
 
+    const lookingForBlock = lookingFor
+      ? `\n\nWhat they're looking for:\n${lookingFor}`
+      : "";
+    const escapeHtml = (s: string) =>
+      s
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/\n/g, "<br/>");
+    const lookingForHtml = lookingFor
+      ? `<p><strong>What they're looking for:</strong><br/>${escapeHtml(lookingFor)}</p>`
+      : "";
+
     await transporter.sendMail({
       from: `"Logarythm" <${user}>`,
       to: RECIPIENTS.join(", "),
       subject: "Request for Demo – Logarythm",
-      text: `A visitor has requested a demo.\n\nEmail: ${email}\n\nPlease follow up within 24 hours.`,
+      text: `A visitor has requested a demo.\n\nEmail: ${email}${lookingForBlock}\n\nPlease follow up within 24 hours.`,
       html: `
         <p>A visitor has requested a demo.</p>
         <p><strong>Email:</strong> ${email}</p>
+        ${lookingForHtml}
         <p>Please follow up within 24 hours.</p>
       `,
     });

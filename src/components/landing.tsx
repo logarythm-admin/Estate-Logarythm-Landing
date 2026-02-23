@@ -63,7 +63,7 @@ const services = [
     icon: Link2,
     title: "Citations",
     description: "Map which platforms AI pulls data from and ensure your brand is prominently cited across all of them.",
-    detail: "Portal audit across 99acres, Magicbricks, Housing.com with structured schema markup optimization.",
+    detail: "Portal audit across Bayut, Property Finder and leading listing sites with structured schema markup optimization.",
   },
   {
     icon: Globe,
@@ -112,18 +112,7 @@ const features = [
   },
 ];
 
-const aiPlatforms = [
-  "ChatGPT",
-  "Perplexity",
-  "Google AI Mode",
-  "Google Gemini",
-  "Microsoft Copilot",
-  "Meta AI",
-  "Grok",
-  "DeepSeek",
-  "Anthropic Claude",
-  "Google AI Overviews",
-];
+const aiPlatforms = ["ChatGPT", "Gemini", "Perplexity", "Grok", "Anthropic"];
 
 function DemoRequestModal({
   open,
@@ -133,6 +122,7 @@ function DemoRequestModal({
   onOpenChange: (open: boolean) => void;
 }) {
   const [email, setEmail] = useState("");
+  const [lookingFor, setLookingFor] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -140,6 +130,7 @@ function DemoRequestModal({
     if (!next) {
       setSuccess(false);
       setEmail("");
+      setLookingFor("");
       setLoading(false);
     }
     onOpenChange(next);
@@ -153,7 +144,7 @@ function DemoRequestModal({
       const res = await fetch("/api/request-demo", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.trim() }),
+        body: JSON.stringify({ email: email.trim(), lookingFor: lookingFor.trim() || undefined }),
       });
       if (!res.ok) throw new Error("Failed to send");
       setSuccess(true);
@@ -190,6 +181,20 @@ function DemoRequestModal({
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 className="border-border bg-background text-white placeholder:text-white/30"
+                disabled={loading}
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="demo-looking-for" className="text-white/80">
+                What are you looking for? <span className="text-white/40 font-normal">(optional)</span>
+              </Label>
+              <textarea
+                id="demo-looking-for"
+                placeholder="e.g. AI visibility audit, brand tracking, competitor insights…"
+                value={lookingFor}
+                onChange={(e) => setLookingFor(e.target.value)}
+                rows={3}
+                className="flex w-full rounded-md border border-border bg-background px-3 py-2 text-base text-white placeholder:text-white/30 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm resize-none"
                 disabled={loading}
               />
             </div>
@@ -619,12 +624,12 @@ export default function Landing() {
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-12">
           <div className="flex h-16 flex-wrap items-center justify-between gap-4">
-            <a href="#" className="flex flex-wrap items-center gap-2" data-testid="nav-logo">
-              <span className="text-lg font-bold tracking-tight text-white">
-                Logarythm<span className="text-primary">.AI</span>
+            <a href="#" className="flex flex-wrap items-baseline gap-2" data-testid="nav-logo">
+              <span className="text-3xl font-light uppercase tracking-[0.02em] text-white">
+                Estates
               </span>
-              <span className="border border-border px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.2em] text-white/50">
-                estates
+              <span className="text-[11px] font-normal italic tracking-tight text-white/60 normal-case">
+                by Logarythm
               </span>
             </a>
             <div className="hidden items-center gap-1 md:flex flex-wrap">
@@ -671,13 +676,6 @@ export default function Landing() {
             animate="visible"
             variants={stagger}
           >
-            <motion.div variants={fadeIn} className="mb-6 inline-flex flex-wrap items-center gap-2">
-              <span className="inline-block h-1.5 w-1.5 bg-primary" />
-              <span className="text-xs font-medium uppercase tracking-[0.2em] text-primary" data-testid="badge-hero">
-                Answer Engine Insights
-              </span>
-            </motion.div>
-
             <motion.h1
               variants={fadeIn}
               className="text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl"
@@ -710,14 +708,21 @@ export default function Landing() {
 
             <motion.div
               variants={fadeIn}
-              className="mt-16 flex flex-wrap items-center gap-6"
+              className="mt-16 flex flex-nowrap items-center justify-center gap-2 overflow-x-auto pb-1 scrollbar-none"
             >
-              <span className="text-[10px] uppercase tracking-[0.15em] text-white/15">Tracking across</span>
-              <div className="flex flex-wrap gap-4">
-                {["ChatGPT", "Gemini", "Perplexity", "Copilot", "Grok"].map((p) => (
-                  <span key={p} className="text-xs font-medium text-white/20">{p}</span>
+              <span className="text-sm font-medium uppercase tracking-[0.12em] text-white/50 shrink-0">
+                Tracking AI visibility across
+              </span>
+              <span className="text-white/30 shrink-0">—</span>
+              <div className="flex flex-nowrap items-center gap-4">
+                {aiPlatforms.map((p, i) => (
+                  <span key={p} className="flex shrink-0 items-center gap-4">
+                    <span className="text-sm font-medium text-white/50">{p}</span>
+                    {i < aiPlatforms.length - 1 && (
+                      <span className="text-white/25" aria-hidden="true">·</span>
+                    )}
+                  </span>
                 ))}
-                <span className="text-xs text-white/15">+5 more</span>
               </div>
             </motion.div>
           </motion.div>
@@ -779,9 +784,9 @@ export default function Landing() {
 
               <motion.div variants={fadeIn} className="mt-8 space-y-4">
                 {[
-                  "\"Best 3 BHK in Andheri West\" \u2014 Are you recommended?",
-                  "\"Compare Godrej vs Lodha in Thane\" \u2014 How are you framed?",
-                  "\"Top developers in Whitefield\" \u2014 Do you even appear?",
+                  "\"Best 3 BHK in Dubai Marina\" \u2014 Are you recommended?",
+                  "\"Compare Emaar vs Damac in UAE\" \u2014 How are you framed?",
+                  "\"Top developers in the Middle East\" \u2014 Do you even appear?",
                 ].map((q, i) => (
                   <div key={i} className="flex flex-wrap items-start gap-3">
                     <div className="mt-1 h-1 w-1 shrink-0 bg-primary" />
@@ -822,10 +827,10 @@ export default function Landing() {
 
                     <div className="border border-border bg-background p-5">
                       <p className="text-xs text-white/30 mb-3 font-mono">
-                        Query: &quot;What are the best developers in Bandra?&quot;
+                        Query: &quot;What are the best developers in Dubai?&quot;
                       </p>
                       <p className="text-sm text-white/60 leading-relaxed">
-                        Choosing the right developer in Bandra comes down to track record, delivery timelines, and project quality. Here&apos;s a curated breakdown of the top developers:
+                        Choosing the right developer in Dubai comes down to track record, delivery timelines, and project quality. Here&apos;s a curated breakdown of the top developers:
                       </p>
                       <div className="mt-4 space-y-3">
                         {["Your Brand", "Competitor A", "Competitor B"].map((name, i) => (
@@ -1046,16 +1051,18 @@ export default function Landing() {
       {/* AI Platforms */}
       <section className="border-t border-border py-16" data-testid="section-platforms">
         <div className="mx-auto max-w-7xl px-6 lg:px-12">
-          <p className="text-center text-xs uppercase tracking-[0.2em] text-white/20 mb-8">
-            Tracking AI visibility across
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-            {aiPlatforms.map((platform) => (
-              <span key={platform} className="text-sm font-medium text-white/25" data-testid={`platform-${platform.replace(/\s+/g, "-").toLowerCase()}`}>
-                {platform}
+          <p className="flex flex-nowrap items-center justify-center gap-2 text-center text-xs uppercase tracking-[0.2em] text-white/30">
+            <span>Tracking AI visibility across</span>
+            <span aria-hidden="true">—</span>
+            {aiPlatforms.map((platform, i) => (
+              <span key={platform} className="inline-flex items-center gap-2">
+                <span className="font-medium text-white/40" data-testid={`platform-${platform.replace(/\s+/g, "-").toLowerCase()}`}>
+                  {platform}
+                </span>
+                {i < aiPlatforms.length - 1 && <span className="text-white/20">·</span>}
               </span>
             ))}
-          </div>
+          </p>
         </div>
       </section>
 
