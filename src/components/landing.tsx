@@ -19,6 +19,16 @@ import {
   Clock,
 } from "lucide-react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -114,6 +124,86 @@ const aiPlatforms = [
   "Anthropic Claude",
   "Google AI Overviews",
 ];
+
+function DemoRequestModal({
+  open,
+  onOpenChange,
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  const handleOpenChange = (next: boolean) => {
+    if (!next) {
+      setSuccess(false);
+      setEmail("");
+      setLoading(false);
+    }
+    onOpenChange(next);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim() || loading) return;
+    setLoading(true);
+    try {
+      const res = await fetch("/api/request-demo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+      if (!res.ok) throw new Error("Failed to send");
+      setSuccess(true);
+      setTimeout(() => {
+        handleOpenChange(false);
+      }, 2500);
+    } catch {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={handleOpenChange}>
+      <DialogContent className="border-border bg-card text-white sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle className="text-white">Request a Demo</DialogTitle>
+          <DialogDescription className="text-white/60">
+            {success
+              ? "You will be contacted within 24 hours."
+              : "Enter your email and we’ll get back to you."}
+          </DialogDescription>
+        </DialogHeader>
+        {!success && (
+          <form onSubmit={handleSubmit} className="grid gap-4 py-2">
+            <div className="grid gap-2">
+              <Label htmlFor="demo-email" className="text-white/80">
+                Email
+              </Label>
+              <Input
+                id="demo-email"
+                type="email"
+                placeholder="you@company.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="border-border bg-background text-white placeholder:text-white/30"
+                disabled={loading}
+              />
+            </div>
+            <DialogFooter>
+              <Button type="submit" disabled={loading}>
+                {loading ? "Sending…" : "Submit"}
+              </Button>
+            </DialogFooter>
+          </form>
+        )}
+      </DialogContent>
+    </Dialog>
+  );
+}
 
 function LargeGaugeViz() {
   return (
@@ -508,6 +598,7 @@ export default function Landing() {
   const [scrolled, setScrolled] = useState(false);
   const [hoveredService, setHoveredService] = useState<number | null>(null);
   const [hoveredPreview, setHoveredPreview] = useState(false);
+  const [demoModalOpen, setDemoModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -545,10 +636,10 @@ export default function Landing() {
               </Button>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <Button variant="outline" size="sm" className="border-border text-white/70" data-testid="button-nav-demo">
+              <Button variant="outline" size="sm" className="border-border text-white/70" data-testid="button-nav-demo" onClick={() => setDemoModalOpen(true)}>
                 Get a Demo
               </Button>
-              <Button size="sm" data-testid="button-nav-started">
+              <Button size="sm" data-testid="button-nav-started" className="hidden">
                 Get Started
               </Button>
             </div>
@@ -608,11 +699,11 @@ export default function Landing() {
               variants={fadeIn}
               className="mt-10 flex flex-wrap items-center gap-3"
             >
-              <Button size="lg" data-testid="button-hero-audit">
+              <Button size="lg" data-testid="button-hero-audit" onClick={() => setDemoModalOpen(true)}>
                 Get a Demo
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-              <Button variant="outline" size="lg" className="border-border text-white/70" data-testid="button-hero-started">
+              <Button variant="outline" size="lg" className="hidden border-border text-white/70" data-testid="button-hero-started">
                 Get Started
               </Button>
             </motion.div>
@@ -700,7 +791,7 @@ export default function Landing() {
               </motion.div>
 
               <motion.div variants={fadeIn} className="mt-10">
-                <Button data-testid="button-insight-audit">
+                <Button data-testid="button-insight-audit" className="hidden">
                   Run a Free AI Audit
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -940,11 +1031,11 @@ export default function Landing() {
               variants={fadeIn}
               className="mt-10 flex flex-wrap items-center justify-center gap-3"
             >
-              <Button size="lg" data-testid="button-cta-audit">
+              <Button size="lg" data-testid="button-cta-audit" onClick={() => setDemoModalOpen(true)}>
                 Request Free Audit
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-              <Button variant="outline" size="lg" className="border-border text-white/70" data-testid="button-cta-contact">
+              <Button variant="outline" size="lg" className="hidden border-border text-white/70" data-testid="button-cta-contact">
                 Talk to Us
               </Button>
             </motion.div>
@@ -967,6 +1058,8 @@ export default function Landing() {
           </div>
         </div>
       </section>
+
+      <DemoRequestModal open={demoModalOpen} onOpenChange={setDemoModalOpen} />
 
       {/* Footer */}
       <footer className="border-t border-border py-12" data-testid="footer">
