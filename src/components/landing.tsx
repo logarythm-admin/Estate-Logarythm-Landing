@@ -170,7 +170,7 @@ function DemoRequestModal({
         {!success && (
           <form onSubmit={handleSubmit} className="grid gap-4 py-2">
             <div className="grid gap-2">
-              <Label htmlFor="demo-email" className="text-white/80">
+              <Label htmlFor="demo-email" className="text-xs font-bold uppercase tracking-[0.1em] text-white/80">
                 Email
               </Label>
               <Input
@@ -185,7 +185,7 @@ function DemoRequestModal({
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="demo-looking-for" className="text-white/80">
+              <Label htmlFor="demo-looking-for" className="text-xs font-bold uppercase tracking-[0.1em] text-white/80">
                 What are you looking for? <span className="text-white/40 font-normal">(optional)</span>
               </Label>
               <textarea
@@ -194,7 +194,7 @@ function DemoRequestModal({
                 value={lookingFor}
                 onChange={(e) => setLookingFor(e.target.value)}
                 rows={3}
-                className="flex w-full rounded-md border border-border bg-background px-3 py-2 text-base text-white placeholder:text-white/30 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm resize-none"
+                className="flex w-full rounded-md border border-border bg-background px-3 py-2 text-base font-medium leading-[1.5] text-white placeholder:text-white/30 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm resize-none"
                 disabled={loading}
               />
             </div>
@@ -237,8 +237,8 @@ function LargeSentimentViz() {
       {data.map((s, i) => (
         <div key={i}>
           <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
-            <span className="text-[10px] text-white/40">{s.label}</span>
-            <span className="text-[10px] font-mono text-primary">{s.w}</span>
+            <span className="text-xs font-normal text-white/40">{s.label}</span>
+            <span className="text-xs font-normal text-primary">{s.w}</span>
           </div>
           <div className="h-2 bg-white/5">
             <motion.div
@@ -301,8 +301,8 @@ function LargeBenchmarkViz() {
       {bars.map((b, i) => (
         <div key={i}>
           <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
-            <span className="text-[10px] text-white/40">{b.label}</span>
-            <span className="text-[10px] font-mono text-white/30">{b.val}%</span>
+            <span className="text-xs font-normal text-white/40">{b.label}</span>
+            <span className="text-xs font-normal text-white/30">{b.val}%</span>
           </div>
           <div className="h-2 bg-white/5">
             <motion.div
@@ -335,7 +335,7 @@ function LargeCitationsViz() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3, delay: i * 0.1 }}
         >
-          <span className="text-[10px] text-white/40 block">{s.name}</span>
+          <span className="text-xs font-normal text-white/40 block">{s.name}</span>
           <span className="text-sm font-semibold text-primary">{s.score}</span>
         </motion.div>
       ))}
@@ -355,8 +355,8 @@ function LargePlatformsViz() {
       {platforms.map((p, i) => (
         <div key={i}>
           <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
-            <span className="text-[10px] text-white/40">{p.name}</span>
-            <span className="text-[10px] font-mono text-primary">{p.val}%</span>
+            <span className="text-xs font-normal text-white/40">{p.name}</span>
+            <span className="text-xs font-normal text-primary">{p.val}%</span>
           </div>
           <div className="h-1.5 bg-white/5">
             <motion.div
@@ -450,7 +450,7 @@ function FeatureTimeline() {
             </div>
           ))}
         </div>
-        <span className="text-[10px] font-mono text-white/20">
+        <span className="text-xs font-normal text-white/20">
           {String(displayIdx + 1).padStart(2, "0")}/{String(features.length).padStart(2, "0")}
         </span>
       </div>
@@ -469,18 +469,18 @@ function FeatureTimeline() {
                 <div className="flex h-10 w-10 items-center justify-center border border-primary/30 bg-primary/10">
                   <activeFeature.icon className="h-5 w-5 text-primary" />
                 </div>
-                <span className="text-[10px] font-mono text-white/20">
+                <span className="text-xs font-normal text-white/20">
                   {String(displayIdx + 1).padStart(2, "0")}
                 </span>
               </div>
 
               <h3
-                className="text-xl font-bold text-white sm:text-2xl"
+                className="text-2xl font-bold tracking-tight text-white sm:text-[32px]"
                 data-testid={`feature-title-active`}
               >
                 {activeFeature.title}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/45 max-w-md">
+              <p className="mt-3 max-w-md text-base font-medium leading-[1.5] text-white/45">
                 {activeFeature.desc}
               </p>
 
@@ -488,7 +488,7 @@ function FeatureTimeline() {
                 {features.map((f, idx) => (
                   <div
                     key={idx}
-                    className={`cursor-pointer border px-3 py-1.5 text-[11px] font-medium transition-colors duration-200 ${
+                    className={`cursor-pointer border px-3 py-1.5 text-xs font-bold uppercase tracking-[0.1em] transition-colors duration-200 ${
                       displayIdx === idx
                         ? "border-primary/40 bg-primary/10 text-primary"
                         : "border-border text-white/30"
@@ -532,8 +532,8 @@ function ResponseGraphViz({ hovered }: { hovered: boolean }) {
   return (
     <div className="mt-4 border border-border p-4">
       <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-        <span className="text-[10px] text-white/30">Visibility trend (30 days)</span>
-        <span className="text-[10px] font-mono text-primary">
+        <span className="text-xs font-normal text-white/30">Visibility trend (30 days)</span>
+        <span className="text-xs font-normal text-primary">
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: hovered ? 1 : 0.3 }}
@@ -555,9 +555,9 @@ function ResponseGraphViz({ hovered }: { hovered: boolean }) {
         ))}
       </div>
       <div className="flex flex-wrap justify-between gap-2 mt-2">
-        <span className="text-[8px] text-white/15 font-mono">Jan</span>
-        <span className="text-[8px] text-white/15 font-mono">Feb</span>
-        <span className="text-[8px] text-white/15 font-mono">Mar</span>
+        <span className="text-xs font-normal text-white/15">Jan</span>
+        <span className="text-xs font-normal text-white/15">Feb</span>
+        <span className="text-xs font-normal text-white/15">Mar</span>
       </div>
     </div>
   );
@@ -591,10 +591,10 @@ function AnimatedStat({ value, label }: { value: string; label: string }) {
 
   return (
     <div ref={ref} className="py-12 px-4 text-center group sm:py-16 sm:px-8">
-      <span className="text-4xl font-bold text-primary sm:text-5xl" data-testid={`stat-${value}`}>
+      <span className="text-4xl font-extrabold text-primary sm:text-5xl" data-testid={`stat-${value}`}>
         {isInView ? displayVal : "0" + suffix}
       </span>
-      <p className="mt-3 text-xs uppercase tracking-wider text-white/30">{label}</p>
+      <p className="mt-3 text-xs font-bold uppercase tracking-[0.1em] text-white/30">{label}</p>
     </div>
   );
 }
@@ -623,24 +623,24 @@ export default function Landing() {
         data-testid="nav-header"
       >
         <div className="mx-auto w-full max-w-7xl min-w-0 px-4 sm:px-6 lg:px-12">
-          <div className="flex h-16 flex-wrap items-center justify-between gap-4">
-            <a href="#" className="flex flex-wrap items-baseline gap-2" data-testid="nav-logo">
-              <span className="text-3xl font-light uppercase tracking-[0.02em] text-white">
+          <div className="grid h-16 grid-cols-[1fr_auto_1fr] items-center gap-4">
+            <a href="#" className="flex min-w-0 flex-wrap items-baseline gap-2 justify-self-start" data-testid="nav-logo">
+              <span className="text-3xl font-extrabold uppercase tracking-[-0.02em] text-white">
                 Estates
               </span>
               <span className="text-[11px] font-normal italic tracking-tight text-white/60 normal-case">
                 by Logarythm
               </span>
             </a>
-            <div className="hidden items-center gap-1 md:flex flex-wrap">
-              <Button variant="ghost" size="sm" className="text-white/80 hover:text-white" asChild data-testid="link-services">
+            <div className="hidden items-center gap-1 md:flex justify-self-center">
+              <Button variant="ghost" size="sm" className="text-xs font-bold uppercase tracking-[0.1em] text-white/80 hover:text-white" asChild data-testid="link-services">
                 <a href="#services">Services</a>
               </Button>
-              <Button variant="ghost" size="sm" className="text-white/80 hover:text-white" asChild data-testid="link-features">
+              <Button variant="ghost" size="sm" className="text-xs font-bold uppercase tracking-[0.1em] text-white/80 hover:text-white" asChild data-testid="link-features">
                 <a href="#features">Features</a>
               </Button>
             </div>
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex items-center gap-3 justify-self-end">
               <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90" data-testid="button-nav-demo" onClick={() => setDemoModalOpen(true)}>
                 Get a Demo
               </Button>
@@ -676,9 +676,17 @@ export default function Landing() {
             animate="visible"
             variants={stagger}
           >
+            <motion.p
+              variants={fadeIn}
+              className="text-2xl font-medium tracking-tight text-white/70"
+              data-testid="text-hero-accent-intro"
+            >
+              Luxury visibility, engineered for AI discovery.
+            </motion.p>
+
             <motion.h1
               variants={fadeIn}
-              className="text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl"
+              className="mt-4 text-5xl font-extrabold leading-[1.02] tracking-[-0.03em] text-white sm:text-6xl lg:text-[64px]"
               data-testid="text-hero-title"
             >
               Understand how AI is talking about{" "}
@@ -687,7 +695,7 @@ export default function Landing() {
 
             <motion.p
               variants={fadeIn}
-              className="mt-6 max-w-lg text-base leading-relaxed text-white/45"
+              className="mt-6 max-w-lg text-base font-medium leading-[1.5] text-white/45"
               data-testid="text-hero-description"
             >
               Track your AI visibility, see where and how AI mentions your brand, and uncover insights to enhance your presence across ChatGPT, Gemini, and Perplexity.
@@ -710,7 +718,7 @@ export default function Landing() {
               variants={fadeIn}
               className="mt-16 flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5 sm:justify-start text-center sm:text-left"
             >
-              <span className="text-sm font-medium uppercase tracking-[0.12em] text-white/50">
+              <span className="text-xs font-normal uppercase tracking-[0.1em] text-white/50 sm:text-sm">
                 Tracking AI visibility across
               </span>
               <span className="hidden sm:inline text-white/30" aria-hidden="true">—</span>
@@ -743,13 +751,13 @@ export default function Landing() {
           <AnimatedSection className="mb-16 text-center">
             <motion.div variants={fadeIn} className="flex flex-wrap items-center justify-center gap-2 mb-4">
               <span className="inline-block h-1.5 w-1.5 bg-primary" />
-              <span className="text-xs font-medium uppercase tracking-[0.2em] text-primary">
+              <span className="text-xs font-bold uppercase tracking-[0.1em] text-primary">
                 Our Features
               </span>
             </motion.div>
             <motion.h2
               variants={fadeIn}
-              className="text-3xl font-bold tracking-tight text-white sm:text-4xl"
+              className="text-3xl font-bold tracking-tight text-white lg:text-[32px]"
               data-testid="text-features-title"
             >
               Built for real estate intelligence
@@ -767,18 +775,18 @@ export default function Landing() {
             <AnimatedSection>
               <motion.div variants={fadeIn} className="flex flex-wrap items-center gap-2 mb-4">
                 <span className="inline-block h-1.5 w-1.5 bg-primary" />
-                <span className="text-xs font-medium uppercase tracking-[0.2em] text-primary">
+                <span className="text-xs font-bold uppercase tracking-[0.1em] text-primary">
                   Real-time Intelligence
                 </span>
               </motion.div>
               <motion.h2
                 variants={fadeIn}
-                className="text-3xl font-bold tracking-tight text-white sm:text-4xl"
+                className="text-3xl font-bold tracking-tight text-white lg:text-[32px]"
                 data-testid="text-insight-title"
               >
                 See exactly what AI says about your projects
               </motion.h2>
-              <motion.p variants={fadeIn} className="mt-4 text-base text-white/40 max-w-md">
+              <motion.p variants={fadeIn} className="mt-4 max-w-md text-base font-medium leading-[1.5] text-white/40">
                 Our platform simulates real buyer queries and tracks how AI platforms respond, giving you actionable data to improve positioning.
               </motion.p>
 
@@ -790,7 +798,7 @@ export default function Landing() {
                 ].map((q, i) => (
                   <div key={i} className="flex items-start gap-2 sm:gap-3">
                     <div className="mt-1.5 h-1 w-1 shrink-0 bg-primary" />
-                    <span className="min-w-0 flex-1 text-sm text-white/50 font-mono">{q}</span>
+                    <span className="min-w-0 flex-1 text-xs font-normal text-white/50">{q}</span>
                   </div>
                 ))}
               </motion.div>
@@ -814,9 +822,9 @@ export default function Landing() {
                   <CardContent className="p-6">
                     <div className="flex flex-wrap items-center gap-2 mb-4 text-xs text-white/30">
                       <Globe className="h-3.5 w-3.5" />
-                      <span className="font-mono">AI Response Preview</span>
+                      <span className="text-xs font-normal">AI Response Preview</span>
                       <motion.span
-                        className="ml-auto text-[10px] text-primary font-mono"
+                        className="ml-auto text-xs font-normal text-primary"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: hoveredPreview ? 1 : 0 }}
                         transition={{ duration: 0.3 }}
@@ -826,7 +834,7 @@ export default function Landing() {
                     </div>
 
                     <div className="border border-border bg-background p-5">
-                      <p className="text-xs text-white/30 mb-3 font-mono">
+                      <p className="mb-3 text-xs font-normal text-white/30">
                         Query: &quot;What are the best developers in Dubai?&quot;
                       </p>
                       <p className="text-sm text-white/60 leading-relaxed">
@@ -844,12 +852,12 @@ export default function Landing() {
                             }}
                             transition={{ duration: 0.3 }}
                           >
-                            <span className="font-mono text-xs text-white/30">#{i + 1}</span>
+                            <span className="text-xs font-normal text-white/30">#{i + 1}</span>
                             <span className={`text-sm font-medium ${i === 0 ? "text-primary" : "text-white/60"}`}>
                               {name}
                             </span>
                             {i === 0 && (
-                              <span className="ml-auto border border-primary/30 bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">
+                              <span className="ml-auto border border-primary/30 bg-primary/10 px-2 py-0.5 text-xs font-normal text-primary">
                                 YOUR BRAND
                               </span>
                             )}
@@ -864,7 +872,7 @@ export default function Landing() {
                           { label: "Citations", val: "12" },
                         ].map((m) => (
                           <div key={m.label} className="border border-border p-2 text-center">
-                            <span className="text-[10px] text-white/25 block">{m.label}</span>
+                            <span className="text-xs font-normal text-white/25 block">{m.label}</span>
                             <span className="text-xs font-semibold text-primary">{m.val}</span>
                           </div>
                         ))}
@@ -886,13 +894,13 @@ export default function Landing() {
           <AnimatedSection className="mb-16">
             <motion.div variants={fadeIn} className="flex flex-wrap items-center gap-2 mb-4">
               <span className="inline-block h-1.5 w-1.5 bg-primary" />
-              <span className="text-xs font-medium uppercase tracking-[0.2em] text-primary">
+              <span className="text-xs font-bold uppercase tracking-[0.1em] text-primary">
                 Our Services
               </span>
             </motion.div>
             <motion.h2
               variants={fadeIn}
-              className="max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl"
+              className="max-w-2xl text-3xl font-bold tracking-tight text-white lg:text-[32px]"
               data-testid="text-services-title"
             >
               Five dimensions of AI visibility
@@ -921,11 +929,11 @@ export default function Landing() {
                       hoveredService === idx ? "text-primary" : "text-white/30"
                     }`} />
 
-                    <h3 className="mt-5 text-base font-semibold text-white">
+                    <h3 className="mt-5 text-2xl font-bold tracking-tight text-white">
                       {service.title}
                     </h3>
 
-                    <p className="mt-3 text-sm leading-relaxed text-white/40">
+                    <p className="mt-3 text-base font-medium leading-[1.5] text-white/40">
                       {service.description}
                     </p>
 
@@ -951,18 +959,18 @@ export default function Landing() {
             <AnimatedSection>
               <motion.div variants={fadeIn} className="flex flex-wrap items-center gap-2 mb-4">
                 <span className="inline-block h-1.5 w-1.5 bg-primary" />
-                <span className="text-xs font-medium uppercase tracking-[0.2em] text-primary">
+                <span className="text-xs font-bold uppercase tracking-[0.1em] text-primary">
                   Why it matters
                 </span>
               </motion.div>
               <motion.h2
                 variants={fadeIn}
-                className="text-3xl font-bold tracking-tight text-white sm:text-4xl"
+                className="text-3xl font-bold tracking-tight text-white lg:text-[32px]"
                 data-testid="text-why-title"
               >
                 The buyer journey has fundamentally shifted
               </motion.h2>
-              <motion.p variants={fadeIn} className="mt-4 text-base text-white/40 max-w-md">
+              <motion.p variants={fadeIn} className="mt-4 max-w-md text-base font-medium leading-[1.5] text-white/40">
                 Today&apos;s buyers don&apos;t scroll portals. They ask AI. The developer who structures for AI today owns the conversation tomorrow.
               </motion.p>
             </AnimatedSection>
@@ -992,8 +1000,8 @@ export default function Landing() {
                         <item.icon className="h-4 w-4 text-primary" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h4 className="text-sm font-semibold text-white">{item.title}</h4>
-                        <p className="mt-1 text-sm text-white/40">{item.desc}</p>
+                        <h4 className="text-xl font-bold tracking-tight text-white">{item.title}</h4>
+                        <p className="mt-1 text-base font-medium leading-[1.5] text-white/40">{item.desc}</p>
                       </div>
                     </CardContent>
                   </Card>
@@ -1021,14 +1029,14 @@ export default function Landing() {
           <AnimatedSection className="mx-auto max-w-2xl text-center">
             <motion.h2
               variants={fadeIn}
-              className="text-3xl font-bold tracking-tight text-white sm:text-4xl"
+              className="text-3xl font-bold tracking-tight text-white lg:text-[32px]"
               data-testid="text-cta-title"
             >
               Ready to own the AI conversation?
             </motion.h2>
             <motion.p
               variants={fadeIn}
-              className="mt-4 text-base text-white/40"
+              className="mt-4 text-base font-medium leading-[1.5] text-white/40"
             >
               Get a complimentary AI visibility audit. We&apos;ll show you exactly where your brand stands.
             </motion.p>
@@ -1051,13 +1059,13 @@ export default function Landing() {
       {/* AI Platforms */}
       <section className="border-t border-border py-16" data-testid="section-platforms">
         <div className="mx-auto w-full max-w-7xl min-w-0 px-4 sm:px-6 lg:px-12">
-          <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5 px-2 text-center text-xs uppercase tracking-[0.2em] text-white/30">
+          <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5 px-2 text-center text-xs font-bold uppercase tracking-[0.1em] text-white/30">
             <span className="w-full sm:w-auto basis-full sm:basis-auto">Tracking AI visibility across</span>
             <span className="hidden sm:inline" aria-hidden="true">—</span>
             <span className="flex flex-wrap items-center justify-center w-full sm:w-auto gap-x-1 gap-y-1 sm:gap-x-2">
               {aiPlatforms.map((platform, i) => (
                 <span key={platform} className="inline-flex items-center gap-1">
-                  <span className="font-medium text-white/40" data-testid={`platform-${platform.replace(/\s+/g, "-").toLowerCase()}`}>
+                  <span className="font-bold text-white/40" data-testid={`platform-${platform.replace(/\s+/g, "-").toLowerCase()}`}>
                     {platform}
                   </span>
                   {i < aiPlatforms.length - 1 && <span className="text-white/20">·</span>}
@@ -1075,7 +1083,7 @@ export default function Landing() {
         <div className="mx-auto w-full max-w-7xl min-w-0 px-4 sm:px-6 lg:px-12">
           <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
             <a href="#" className="flex flex-wrap items-baseline gap-2" data-testid="footer-logo">
-              <span className="text-3xl font-light uppercase tracking-[0.02em] text-white">
+              <span className="text-3xl font-extrabold uppercase tracking-[-0.02em] text-white">
                 Estates
               </span>
               <span className="text-[11px] font-normal italic tracking-tight text-white/60 normal-case">
