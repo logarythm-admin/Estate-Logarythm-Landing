@@ -320,10 +320,10 @@ function LargeBenchmarkViz() {
 
 function LargeCitationsViz() {
   const sources = [
-    { name: "99acres", score: 92 },
-    { name: "MagicBricks", score: 85 },
-    { name: "Housing.com", score: 78 },
-    { name: "CommonFloor", score: 61 },
+    { name: "Dubizzle", score: 92 },
+    { name: "Property Finder", score: 85 },
+    { name: "Bayut", score: 78 },
+    { name: "JustProperty", score: 61 },
   ];
   return (
     <div className="grid grid-cols-2 gap-2">
@@ -633,15 +633,15 @@ export default function Landing() {
               </span>
             </a>
             <div className="hidden items-center gap-1 md:flex flex-wrap">
-              <Button variant="ghost" size="sm" className="text-white/50" asChild data-testid="link-services">
+              <Button variant="ghost" size="sm" className="text-white/80 hover:text-white" asChild data-testid="link-services">
                 <a href="#services">Services</a>
               </Button>
-              <Button variant="ghost" size="sm" className="text-white/50" asChild data-testid="link-features">
+              <Button variant="ghost" size="sm" className="text-white/80 hover:text-white" asChild data-testid="link-features">
                 <a href="#features">Features</a>
               </Button>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <Button variant="outline" size="sm" className="border-border text-white/70" data-testid="button-nav-demo" onClick={() => setDemoModalOpen(true)}>
+              <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90" data-testid="button-nav-demo" onClick={() => setDemoModalOpen(true)}>
                 Get a Demo
               </Button>
               <Button size="sm" data-testid="button-nav-started" className="hidden">
@@ -708,13 +708,13 @@ export default function Landing() {
 
             <motion.div
               variants={fadeIn}
-              className="mt-16 flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5 px-1 text-center"
+              className="mt-16 flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5 sm:justify-start text-center sm:text-left"
             >
               <span className="text-sm font-medium uppercase tracking-[0.12em] text-white/50">
                 Tracking AI visibility across
               </span>
-              <span className="text-white/30" aria-hidden="true">—</span>
-              <div className="flex flex-wrap items-center justify-center gap-x-1 gap-y-1">
+              <span className="hidden sm:inline text-white/30" aria-hidden="true">—</span>
+              <div className="flex flex-wrap items-center justify-center w-full sm:w-auto gap-x-1 gap-y-1 sm:justify-start">
                 {aiPlatforms.map((p, i) => (
                   <span key={p} className="inline-flex items-center gap-1">
                     <span className="text-sm font-medium text-white/50">{p}</span>
@@ -744,7 +744,7 @@ export default function Landing() {
             <motion.div variants={fadeIn} className="flex flex-wrap items-center justify-center gap-2 mb-4">
               <span className="inline-block h-1.5 w-1.5 bg-primary" />
               <span className="text-xs font-medium uppercase tracking-[0.2em] text-primary">
-                Platform Capabilities
+                Our Features
               </span>
             </motion.div>
             <motion.h2
@@ -784,13 +784,13 @@ export default function Landing() {
 
               <motion.div variants={fadeIn} className="mt-8 space-y-4">
                 {[
-                  "\"Best 3 BHK in Dubai Marina\" \u2014 Are you recommended?",
-                  "\"Compare Emaar vs Damac in UAE\" \u2014 How are you framed?",
-                  "\"Top developers in the Middle East\" \u2014 Do you even appear?",
+                  "\"Best 3 BHK in Dubai Marina\" — Are you recommended?",
+                  "\"Compare Emaar vs Damac in UAE\" — How are you framed?",
+                  "\"Top developers in the Middle East\" — Do you even appear?",
                 ].map((q, i) => (
-                  <div key={i} className="flex flex-wrap items-start gap-3">
-                    <div className="mt-1 h-1 w-1 shrink-0 bg-primary" />
-                    <span className="text-sm text-white/50 font-mono">{q}</span>
+                  <div key={i} className="flex items-start gap-2 sm:gap-3">
+                    <div className="mt-1.5 h-1 w-1 shrink-0 bg-primary" />
+                    <span className="min-w-0 flex-1 text-sm text-white/50 font-mono">{q}</span>
                   </div>
                 ))}
               </motion.div>
@@ -887,7 +887,7 @@ export default function Landing() {
             <motion.div variants={fadeIn} className="flex flex-wrap items-center gap-2 mb-4">
               <span className="inline-block h-1.5 w-1.5 bg-primary" />
               <span className="text-xs font-medium uppercase tracking-[0.2em] text-primary">
-                Understand and control your AI Presence
+                Our Services
               </span>
             </motion.div>
             <motion.h2
@@ -1008,7 +1008,7 @@ export default function Landing() {
       <section className="border-t border-border" data-testid="section-stats">
         <div className="mx-auto w-full max-w-7xl min-w-0 px-4 sm:px-6 lg:px-12">
           <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-border">
-            <AnimatedStat value="73%" label="of property searches now involve AI" />
+            <AnimatedStat value="73%" label="yearly increase in usage of AI for property search" />
             <AnimatedStat value="4.2x" label="higher conversion from AI leads" />
             <AnimatedStat value="58%" label="of buyers trust AI over ads" />
           </div>
@@ -1051,18 +1051,20 @@ export default function Landing() {
       {/* AI Platforms */}
       <section className="border-t border-border py-16" data-testid="section-platforms">
         <div className="mx-auto w-full max-w-7xl min-w-0 px-4 sm:px-6 lg:px-12">
-          <p className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5 px-2 text-center text-xs uppercase tracking-[0.2em] text-white/30">
-            <span>Tracking AI visibility across</span>
-            <span aria-hidden="true">—</span>
-            {aiPlatforms.map((platform, i) => (
-              <span key={platform} className="inline-flex items-center gap-1">
-                <span className="font-medium text-white/40" data-testid={`platform-${platform.replace(/\s+/g, "-").toLowerCase()}`}>
-                  {platform}
+          <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5 px-2 text-center text-xs uppercase tracking-[0.2em] text-white/30">
+            <span className="w-full sm:w-auto basis-full sm:basis-auto">Tracking AI visibility across</span>
+            <span className="hidden sm:inline" aria-hidden="true">—</span>
+            <span className="flex flex-wrap items-center justify-center w-full sm:w-auto gap-x-1 gap-y-1 sm:gap-x-2">
+              {aiPlatforms.map((platform, i) => (
+                <span key={platform} className="inline-flex items-center gap-1">
+                  <span className="font-medium text-white/40" data-testid={`platform-${platform.replace(/\s+/g, "-").toLowerCase()}`}>
+                    {platform}
+                  </span>
+                  {i < aiPlatforms.length - 1 && <span className="text-white/20">·</span>}
                 </span>
-                {i < aiPlatforms.length - 1 && <span className="text-white/20">·</span>}
-              </span>
-            ))}
-          </p>
+              ))}
+            </span>
+          </div>
         </div>
       </section>
 
