@@ -590,7 +590,7 @@ function AnimatedStat({ value, label }: { value: string; label: string }) {
     : Math.round(current) + suffix;
 
   return (
-    <div ref={ref} className="py-16 px-8 text-center group">
+    <div ref={ref} className="py-12 px-4 text-center group sm:py-16 sm:px-8">
       <span className="text-4xl font-bold text-primary sm:text-5xl" data-testid={`stat-${value}`}>
         {isInView ? displayVal : "0" + suffix}
       </span>
@@ -612,7 +612,7 @@ export default function Landing() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
       {/* Navigation */}
       <nav
         className={`fixed top-0 left-0 right-0 z-[999] transition-all duration-300 ${
@@ -622,7 +622,7 @@ export default function Landing() {
         }`}
         data-testid="nav-header"
       >
-        <div className="mx-auto max-w-7xl px-6 lg:px-12">
+        <div className="mx-auto w-full max-w-7xl min-w-0 px-4 sm:px-6 lg:px-12">
           <div className="flex h-16 flex-wrap items-center justify-between gap-4">
             <a href="#" className="flex flex-wrap items-baseline gap-2" data-testid="nav-logo">
               <span className="text-3xl font-light uppercase tracking-[0.02em] text-white">
@@ -669,9 +669,9 @@ export default function Landing() {
           <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
         </div>
 
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-24 pb-20 lg:px-12">
+        <div className="relative z-10 mx-auto w-full max-w-7xl min-w-0 px-4 pt-24 pb-20 sm:px-6 lg:px-12">
           <motion.div
-            className="max-w-3xl"
+            className="max-w-3xl min-w-0"
             initial="hidden"
             animate="visible"
             variants={stagger}
@@ -708,15 +708,15 @@ export default function Landing() {
 
             <motion.div
               variants={fadeIn}
-              className="mt-16 flex flex-nowrap items-center justify-center gap-2 overflow-x-auto pb-1 scrollbar-none"
+              className="mt-16 flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5 px-1 text-center"
             >
-              <span className="text-sm font-medium uppercase tracking-[0.12em] text-white/50 shrink-0">
+              <span className="text-sm font-medium uppercase tracking-[0.12em] text-white/50">
                 Tracking AI visibility across
               </span>
-              <span className="text-white/30 shrink-0">—</span>
-              <div className="flex flex-nowrap items-center gap-4">
+              <span className="text-white/30" aria-hidden="true">—</span>
+              <div className="flex flex-wrap items-center justify-center gap-x-1 gap-y-1">
                 {aiPlatforms.map((p, i) => (
-                  <span key={p} className="flex shrink-0 items-center gap-4">
+                  <span key={p} className="inline-flex items-center gap-1">
                     <span className="text-sm font-medium text-white/50">{p}</span>
                     {i < aiPlatforms.length - 1 && (
                       <span className="text-white/25" aria-hidden="true">·</span>
@@ -739,7 +739,7 @@ export default function Landing() {
 
       {/* Platform Capabilities / Features Timeline */}
       <section id="features" className="py-28 border-t border-border" data-testid="section-features">
-        <div className="mx-auto max-w-7xl px-6 lg:px-12">
+        <div className="mx-auto w-full max-w-7xl min-w-0 px-4 sm:px-6 lg:px-12">
           <AnimatedSection className="mb-16 text-center">
             <motion.div variants={fadeIn} className="flex flex-wrap items-center justify-center gap-2 mb-4">
               <span className="inline-block h-1.5 w-1.5 bg-primary" />
@@ -762,7 +762,7 @@ export default function Landing() {
 
       {/* Real-time Intelligence / Insight Preview */}
       <section className="py-28 border-t border-border" data-testid="section-insight">
-        <div className="mx-auto max-w-7xl px-6 lg:px-12">
+        <div className="mx-auto w-full max-w-7xl min-w-0 px-4 sm:px-6 lg:px-12">
           <div className="grid items-center gap-16 lg:grid-cols-2">
             <AnimatedSection>
               <motion.div variants={fadeIn} className="flex flex-wrap items-center gap-2 mb-4">
@@ -882,7 +882,7 @@ export default function Landing() {
 
       {/* Services Section */}
       <section id="services" className="py-28 border-t border-border" data-testid="section-services">
-        <div className="mx-auto max-w-7xl px-6 lg:px-12">
+        <div className="mx-auto w-full max-w-7xl min-w-0 px-4 sm:px-6 lg:px-12">
           <AnimatedSection className="mb-16">
             <motion.div variants={fadeIn} className="flex flex-wrap items-center gap-2 mb-4">
               <span className="inline-block h-1.5 w-1.5 bg-primary" />
@@ -946,7 +946,7 @@ export default function Landing() {
 
       {/* Why It Matters */}
       <section className="py-28 border-t border-border" data-testid="section-why">
-        <div className="mx-auto max-w-7xl px-6 lg:px-12">
+        <div className="mx-auto w-full max-w-7xl min-w-0 px-4 sm:px-6 lg:px-12">
           <div className="grid items-start gap-16 lg:grid-cols-2">
             <AnimatedSection>
               <motion.div variants={fadeIn} className="flex flex-wrap items-center gap-2 mb-4">
@@ -1006,7 +1006,7 @@ export default function Landing() {
 
       {/* Stats */}
       <section className="border-t border-border" data-testid="section-stats">
-        <div className="mx-auto max-w-7xl px-6 lg:px-12">
+        <div className="mx-auto w-full max-w-7xl min-w-0 px-4 sm:px-6 lg:px-12">
           <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-border">
             <AnimatedStat value="73%" label="of property searches now involve AI" />
             <AnimatedStat value="4.2x" label="higher conversion from AI leads" />
@@ -1017,7 +1017,7 @@ export default function Landing() {
 
       {/* CTA Section */}
       <section className="py-28 border-t border-border" data-testid="section-cta">
-        <div className="mx-auto max-w-7xl px-6 lg:px-12">
+        <div className="mx-auto w-full max-w-7xl min-w-0 px-4 sm:px-6 lg:px-12">
           <AnimatedSection className="mx-auto max-w-2xl text-center">
             <motion.h2
               variants={fadeIn}
@@ -1050,12 +1050,12 @@ export default function Landing() {
 
       {/* AI Platforms */}
       <section className="border-t border-border py-16" data-testid="section-platforms">
-        <div className="mx-auto max-w-7xl px-6 lg:px-12">
-          <p className="flex flex-nowrap items-center justify-center gap-2 text-center text-xs uppercase tracking-[0.2em] text-white/30">
+        <div className="mx-auto w-full max-w-7xl min-w-0 px-4 sm:px-6 lg:px-12">
+          <p className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5 px-2 text-center text-xs uppercase tracking-[0.2em] text-white/30">
             <span>Tracking AI visibility across</span>
             <span aria-hidden="true">—</span>
             {aiPlatforms.map((platform, i) => (
-              <span key={platform} className="inline-flex items-center gap-2">
+              <span key={platform} className="inline-flex items-center gap-1">
                 <span className="font-medium text-white/40" data-testid={`platform-${platform.replace(/\s+/g, "-").toLowerCase()}`}>
                   {platform}
                 </span>
@@ -1070,16 +1070,16 @@ export default function Landing() {
 
       {/* Footer */}
       <footer className="border-t border-border py-12" data-testid="footer">
-        <div className="mx-auto max-w-7xl px-6 lg:px-12">
+        <div className="mx-auto w-full max-w-7xl min-w-0 px-4 sm:px-6 lg:px-12">
           <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="text-sm font-bold tracking-tight text-white/50">
-                Logarythm<span className="text-primary/50">.AI</span>
+            <a href="#" className="flex flex-wrap items-baseline gap-2" data-testid="footer-logo">
+              <span className="text-3xl font-light uppercase tracking-[0.02em] text-white">
+                Estates
               </span>
-              <span className="border border-border px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.2em] text-white/30">
-                estates
+              <span className="text-[11px] font-normal italic tracking-tight text-white/60 normal-case">
+                by Logarythm
               </span>
-            </div>
+            </a>
             <p className="text-xs text-white/20">
               AI-powered visibility intelligence for the real estate industry.
             </p>
